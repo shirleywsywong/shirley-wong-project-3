@@ -192,27 +192,30 @@ legend, button::-moz-focus-inner, input::-moz-focus-inner {
 
 body {
   background: #bada55;
-  padding-top: 100px;
+  padding-top: 50px;
   display: -ms-grid;
   display: grid;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  font-size: 5rem;
   font-family: 'Righteous', cursive;
 }
 
 p {
   place-self: center;
   margin: 0;
+  font-size: 3rem;
 }
 
-.notes {
+.instructions {
   max-width: 900px;
   font-size: 2rem;
 }
 
 .grid {
+  width: 60vh;
+  height: 60vh;
+  place-self: center;
   display: -ms-grid;
   display: grid;
   -ms-grid-columns: (1fr)[3];
@@ -221,25 +224,34 @@ p {
       grid-template-rows: repeat(3, 1fr);
   grid-gap: 1.5rem;
   padding: 2rem;
-  border: 8px solid #000;
+  border: 8px solid black;
   border-radius: 15px;
+  /* Landscape phone to portrait tablet */
+}
+
+@media (min-width: 768px) {
+  .grid {
+    width: 70vh;
+    height: 70vh;
+  }
 }
 
 .item {
+  place-self: center;
   background: #444;
   color: #b0e0e6;
-  width: 10vw;
-  height: 10vw;
+  width: 100%;
+  height: 100%;
   border-radius: 15px;
   display: -ms-grid;
   display: grid;
 }
 
 .item svg {
-  width: 7.5vw;
+  width: 50%;
   place-self: center;
-  -webkit-animation: rotation 2s infinite linear;
-          animation: rotation 2s infinite linear;
+  -webkit-animation: rotation 5s infinite linear;
+          animation: rotation 5s infinite linear;
 }
 
 @-webkit-keyframes rotation {
@@ -265,6 +277,8 @@ p {
 }
 
 .hud {
+  width: 60vh;
+  place-self: center;
   display: -ms-grid;
   display: grid;
   -ms-grid-columns: (1fr)[2];
@@ -275,10 +289,17 @@ p {
       -ms-flex-align: stretch;
           align-items: stretch;
   grid-gap: 1.5rem;
-  padding: 2rem;
-  margin-top: 2rem;
-  border: 8px solid #000;
+  padding: 1rem;
+  margin: 2rem 0;
+  border: 8px solid black;
   border-radius: 15px;
+  /* Landscape phone to portrait tablet */
+}
+
+@media (min-width: 768px) {
+  .hud {
+    width: 70vh;
+  }
 }
 
 .turn {
@@ -287,46 +308,18 @@ p {
   border-radius: 15px;
   display: -ms-grid;
   display: grid;
-  height: 6.5rem;
 }
 
-.turn-x p {
+.turnAnimate {
   text-align: center;
-  -webkit-animation: turn-x 0.4s ease-in-out both;
-          animation: turn-x 0.4s ease-in-out both;
+  -webkit-animation: turn-style 0.4s cubic-bezier(0.65, 0.05, 0.36, 1) both;
+          animation: turn-style 0.4s cubic-bezier(0.65, 0.05, 0.36, 1) both;
 }
 
-@-webkit-keyframes turn-x {
+@-webkit-keyframes turn-style {
   from {
-    -webkit-transform: rotate(0);
-            transform: rotate(0);
-  }
-  to {
-    -webkit-transform: rotate(360deg);
-            transform: rotate(360deg);
-  }
-}
-
-@keyframes turn-x {
-  from {
-    -webkit-transform: rotate(0);
-            transform: rotate(0);
-  }
-  to {
-    -webkit-transform: rotate(360deg);
-            transform: rotate(360deg);
-  }
-}
-
-.turn-o p {
-  -webkit-animation: turn-o 0.4s cubic-bezier(0.65, 0.05, 0.36, 1) both;
-          animation: turn-o 0.4s cubic-bezier(0.65, 0.05, 0.36, 1) both;
-}
-
-@-webkit-keyframes turn-o {
-  from {
-    -webkit-transform: scale(0.5);
-            transform: scale(0.5);
+    -webkit-transform: scale(0.05);
+            transform: scale(0.05);
   }
   to {
     -webkit-transform: scale(1);
@@ -334,10 +327,10 @@ p {
   }
 }
 
-@keyframes turn-o {
+@keyframes turn-style {
   from {
-    -webkit-transform: scale(0.5);
-            transform: scale(0.5);
+    -webkit-transform: scale(0.05);
+            transform: scale(0.05);
   }
   to {
     -webkit-transform: scale(1);

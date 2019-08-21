@@ -1,41 +1,51 @@
-@import "setup";
+@import "partials/setup";
+@import "partials/global";
 
 body {
-    background: #bada55;
-    padding-top: 100px;
+    background: $limeGreen;
+    padding-top: 50px;
     display: grid;
     justify-content: center;
-    font-size: 5rem;
     font-family: 'Righteous', cursive;
 }
 p {
     place-self: center;
     margin: 0;
+    font-size: 3rem;
 }
-.notes {
+.instructions {
     max-width: 900px;
     font-size: 2rem;
 }
 .grid {
+    width: 60vh;
+    height: 60vh;
+    place-self: center;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
     grid-gap: 1.5rem;
     padding: 2rem;
-    border: 8px solid #000;
+    border: 8px solid $black;
     border-radius: 15px;
+    /* Landscape phone to portrait tablet */
+    @media (min-width: 768px){
+        width: 70vh;
+        height: 70vh;
+    }
 }
 .item {
-    background: #444;
-    color: #b0e0e6;
-    width: 10vw;
-    height: 10vw;
+    place-self: center;
+    background: $darkGrey;
+    color: $lightBlue;
+    width: 100%;
+    height: 100%;
     border-radius: 15px;
     display: grid;
     svg {
-        width: 7.5vw;
+        width: 50%;
         place-self: center;
-        animation: rotation 2s infinite linear;
+        animation: rotation 5s infinite linear;
     }
 }
 @keyframes rotation {
@@ -47,60 +57,51 @@ p {
   }
 }
 .hud {
+    width: 60vh;
+    // height: 25vh;
+    place-self: center;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: 1fr;
     align-items: stretch;
     grid-gap: 1.5rem;
-    padding: 2rem;
-    margin-top: 2rem;
-    border: 8px solid #000;
+    padding: 1rem;
+    margin: 2rem 0;
+    border: 8px solid $black;
     border-radius: 15px;
+    /* Landscape phone to portrait tablet */
+    @media (min-width: 768px){
+        width: 70vh;
+    }
 }
 .turn {
-    background: #444;
-    color: #b0e0e6;
+    background: $darkGrey;
+    color: $lightBlue;
     border-radius: 15px;
     display: grid;
-    height: 6.5rem;
 }
-.turn-x {
-    p {
-        text-align: center;
-        animation: turn-x 0.4s ease-in-out both;
-    }
+.turnAnimate {
+    text-align: center;
+    animation: turn-style 0.4s cubic-bezier(.65,.05,.36,1) both;
 }
-@keyframes turn-x {
+@keyframes turn-style {
   from {
-    transform: rotate(0);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-.turn-o {
-    p{
-        animation: turn-o 0.4s cubic-bezier(.65,.05,.36,1) both;
-    }
-}
-@keyframes turn-o {
-  from {
-    transform: scale(0.5);
+    transform: scale(0.05);
   }
   to {
     transform: scale(1);   
   }
 }
 .active {
-    box-shadow: 9px 9px #467763;
+    box-shadow: 9px 9px $pine;
     transition: all linear 0.1s;
     &:active {
-        box-shadow: 5px 5px #385f4f;
+        box-shadow: 5px 5px $darkPine;
         transform: translate(4px, 4px);
     }
 }
 .inactive {
-    background: #888;
+    background: $lightGrey;
     cursor: not-allowed;
-    box-shadow: 5px 5px #385f4f;
+    box-shadow: 5px 5px $darkPine;
 }

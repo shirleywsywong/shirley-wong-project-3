@@ -9,6 +9,10 @@
     <link rel="stylesheet" href="styles/style.css">
 </head>
 <body>
+    <h1>Tic Tac Toe</h1>
+    <div class="instructions">
+        <p>Instruction and result goes here</p>
+    </div>
     <div class="grid">
         <div class="item active item1" id="TL">
             <span class="sr-only">Top row left column</span>
@@ -78,26 +82,14 @@
         </div>
     </div>
     <div class="hud">
-        <div class="turn turn-x active">
+        <div class="turn active">
             <p>x</p>
         </div>
-        <div class="turn turn-o active">
+        <div class="turn active">
             <p>o</p>
         </div>
     </div>
-    <div class="notes">
-        <p>in the grid part</p>
-        <ol>
-            <li>add click listeners to elements in grid</li>
-            <li>grid is an object, each item is a property with boolean values</li>
-            <li>when an item is clicked, set boolean to false, add x/o to the DOM, toggle the x/o, apply inactive class to DOM item</li>
-        </ol>
-        <p>in the hud part</p>
-        <ol>
-            <li>start off with "x" - x has the active:active class</li>
-            <li>wait for user to select element in grid</li>
-            <li>toggle x:active to o:active</li>
-        </ol>
-    </div>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="javascript/script.js"></script>
 </body>
 </html>
