@@ -36,21 +36,37 @@ const grid = {
         character: ""
     }
 }
+
+//the grid part
+//when an element is clicked
 $('.item').on('click', function(){
-    //1. click box, make "x"
-    grid[this.id]["occupy"] = true;
-    grid[this.id]["character"] = "X";
+
+    if (grid[this.id]["occupy"] === false) {
+
+    //grab the text from the turn indicator that has a class of active
+    const turn = $('.turn.active > p').text();
     
-    const temp = `<p class="turnAnimate">X</p>`
+    //set the element as occupied, and add the text to the element
+    grid[this.id]["occupy"] = true;
+    grid[this.id]["character"] = turn;
+    
+    //DOM rendering
+    const temp = `<p class="turnAnimate">${turn}</p>`
     $(this)
     .html(temp)
     .removeClass('active')
     .addClass('inactive');
 
-    console.log(grid[this.id]);
-    // console.log(this.id)
+    //x: remove active class, add inactive class
+    //O: remove inactive class, add active class
+    $('.turnX').toggleClass('active inactive');
+    $('.turnO').toggleClass('inactive active');
 
+    }
+    
 })
+
+//the hud part
 
 $(function(){
 })
