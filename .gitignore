@@ -5,3 +5,6 @@ wireframe.jpg
 .vscode/
 
 https://www.color-hex.com/color-palette/73504
+
+win:
+- use vh units so everyting will fit in 1 vertical screen
