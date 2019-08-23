@@ -1,17 +1,29 @@
 @import "partials/setup";
 @import "partials/global";
 
+//layout styles
 body {
     background: $limeGreen;
-    padding-top: 50px;
+    // padding-top: 50px;
     display: grid;
     justify-content: center;
     font-family: 'Righteous', cursive;
 }
+h1 {
+    text-align: center;
+    font-size: 4rem;
+    @media (min-width: 768px){
+        font-size: 5rem;
+    }
+}
 p {
     place-self: center;
+    text-align: center;
     margin: 0;
-    font-size: 3rem;
+    font-size: 2.5rem;
+    @media (min-width: 768px){
+        font-size: 3rem;
+    }
 }
 .instructions {
     max-width: 900px;
@@ -103,4 +115,38 @@ p {
     background: $lightGrey;
     cursor: not-allowed;
     box-shadow: 5px 5px $darkPine;
+}
+.win {
+    animation: rotate-center 0.6s ease-in-out both; 
+    background: $pine;
+    p {
+        animation: anim-moema-1 0.5s forwards infinite;
+        &::before {
+            content: '';
+            position: absolute;
+            transform: scale3d(0.5, 0.5, 0.5);
+        }
+    }
+}
+@keyframes rotate-center {
+    0% {
+        transform: rotate(0);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+@keyframes anim-moema-1 {
+	60% {
+		-webkit-transform: scale3d(0.8, 0.8, 1);
+		transform: scale3d(0.8, 0.8, 1);
+	}
+	85% {
+		-webkit-transform: scale3d(1.1, 1.1, 1);
+		transform: scale3d(2, 2, 1);
+	}
+	100% {
+		-webkit-transform: scale3d(1, 1, 1);
+		transform: scale3d(1, 1, 1);
+	}
 }

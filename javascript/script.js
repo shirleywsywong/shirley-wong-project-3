@@ -1,4 +1,6 @@
-const grid = {
+//ttt for tic tac toe
+ttt = {};
+ttt.grid = {
     TL: {
         occupy: false,
         character: ""
@@ -37,66 +39,128 @@ const grid = {
     }
 }
 
-//the grid part
-//when an element is clicked
-$('.item').on('click', function(){
+//adding character to game board when element is clicked
+ttt.addingCharacter = function (clickedBox) {
+    //if an element is clicked, can't click it again
+    if (this.grid[clickedBox.id]["occupy"] === false) {
 
-    if (grid[this.id]["occupy"] === false) {
-
-        //grab the text from the turn indicator that has a class of active
+        //grab the text from the hud that has a class of active
         const turn = $('.turn.active > p').text();
-        
+
         //set the element as occupied, and add the text to the element
-        grid[this.id]["occupy"] = true;
-        grid[this.id]["character"] = turn;
-        
+        this.grid[clickedBox.id]["occupy"] = true;
+        this.grid[clickedBox.id]["character"] = turn;
+
         //DOM rendering
-        const temp = `<p class="turnAnimate">${turn}</p>`
-        $(this)
-        .html(temp)
-        .removeClass('active')
-        .addClass('inactive');
+        const addCharaterToElement = `<p class="turnAnimate">${turn}</p>`
+        $(clickedBox)
+            .html(addCharaterToElement)
+            .removeClass('active')
+            .addClass('inactive');
 
         //x: remove active class, add inactive class
         //O: remove inactive class, add active class
         $('.turnX').toggleClass('active inactive');
         $('.turnO').toggleClass('inactive active');
 
-        check();
+        //check for endgame once something is clicked
+        this.check();
     }
-    
-})
+}
 
 //check for endgame
-const check = function() {
+ttt.end = false;
+ttt.check = function() {
+
+    const checkTL = this.grid['TL'];
+    const checkTM = this.grid['TM'];
+    const checkTR = this.grid['TR'];
+    const checkML = this.grid['ML'];
+    const checkMM = this.grid['MM'];
+    const checkMR = this.grid['MR'];
+    const checkBL = this.grid['BL'];
+    const checkBM = this.grid['BM'];
+    const checkBR = this.grid['BR'];
     
-    const topRow        = grid['TL']['character'] == grid['TM']['character'] && grid['TM']['character'] == grid['TR']['character'] && grid['TR']['character'] != "";
-    const middleRow     = grid['ML']['character'] == grid['MM']['character'] && grid['MM']['character'] == grid['MR']['character'] && grid['MR']['character'] != "";
-    const bottomRow     = grid['BL']['character'] == grid['BM']['character'] && grid['BM']['character'] == grid['BR']['character'] && grid['BR']['character'] != "";
-    const leftColumn    = grid['TL']['character'] == grid['ML']['character'] && grid['ML']['character'] == grid['BL']['character'] && grid['BL']['character'] != "";
-    const middleColumn  = grid['TM']['character'] == grid['MM']['character'] && grid['MM']['character'] == grid['BM']['character'] && grid['BM']['character'] != "";
-    const rightColumn   = grid['TR']['character'] == grid['MR']['character'] && grid['MR']['character'] == grid['BR']['character'] && grid['BR']['character'] != "";
-    const leftDiagonal  = grid['TL']['character'] == grid['MM']['character'] && grid['MM']['character'] == grid['BR']['character'] && grid['BR']['character'] != "";
-    const rightDiagonal = grid['TR']['character'] == grid['MM']['character'] && grid['MM']['character'] == grid['BL']['character'] && grid['BL']['character'] != "";
+    const topRow        = checkTL['character'] == checkTM['character'] && checkTM['character'] == checkTR['character'] && checkTR['character'] != "";
+    const middleRow     = checkML['character'] == checkMM['character'] && checkMM['character'] == checkMR['character'] && checkMR['character'] != "";
+    const bottomRow     = checkBL['character'] == checkBM['character'] && checkBM['character'] == checkBR['character'] && checkBR['character'] != "";
+    const leftColumn    = checkTL['character'] == checkML['character'] && checkML['character'] == checkBL['character'] && checkBL['character'] != "";
+    const middleColumn  = checkTM['character'] == checkMM['character'] && checkMM['character'] == checkBM['character'] && checkBM['character'] != "";
+    const rightColumn   = checkTR['character'] == checkMR['character'] && checkMR['character'] == checkBR['character'] && checkBR['character'] != "";
+    const leftDiagonal  = checkTL['character'] == checkMM['character'] && checkMM['character'] == checkBR['character'] && checkBR['character'] != "";
+    const rightDiagonal = checkTR['character'] == checkMM['character'] && checkMM['character'] == checkBL['character'] && checkBL['character'] != "";
 
     if (topRow) {
-        console.log(`top row ${grid['TL']['character']}`)
+        this.end = true;
+        $('#TL').addClass('win');
+        $('#TM').addClass('win');
+        $('#TR').addClass('win');
+        $('.instructions > p').html(`${checkTL['character']} wins!`);
     } else if (middleRow) {
-        console.log(`middle row ${grid['ML']['character']}`)
+        this.end = true;
+        $('#ML').addClass('win');
+        $('#MM').addClass('win');
+        $('#MR').addClass('win');
+        $('.instructions > p').html(`${checkML['character']} wins!`);
     } else if (bottomRow) {
-        console.log(`bottom row ${grid['BL']['character']}`)
+        this.end = true;
+        $('#BL').addClass('win');
+        $('#BM').addClass('win');
+        $('#BR').addClass('win');
+        $('.instructions > p').html(`${checkBL['character']} wins!`);
     } else if (leftColumn) {
-        console.log(`left column ${grid['TL']['character']}`)
+        this.end = true;
+        $('#TL').addClass('win');
+        $('#ML').addClass('win');
+        $('#BL').addClass('win');
+        $('.instructions > p').html(`${checkTL['character']} wins!`);
     } else if (middleColumn) {
-        console.log(`middle column ${grid['TM']['character']}`)
+        this.end = true;
+        $('#TM').addClass('win');
+        $('#MM').addClass('win');
+        $('#BM').addClass('win');
+        $('.instructions > p').html(`${checkTM['character']} wins!`);
     } else if (rightColumn) {
-        console.log(`right column ${grid['TR']['character']}`)
+        this.end = true;
+        $('#TR').addClass('win');
+        $('#MR').addClass('win');
+        $('#BR').addClass('win');
+        $('.instructions > p').html(`${checkTR['character']} wins!`);
     } else if (leftDiagonal) {
-        console.log(`left diagonal ${grid['TL']['character']}`)
+        this.end = true;
+        $('#TL').addClass('win');
+        $('#MM').addClass('win');
+        $('#BR').addClass('win');
+        $('.instructions > p').html(`${checkTL['character']} wins!`);
     } else if (rightDiagonal) {
-        console.log(`right diagonal ${grid['TR']['character']}`)
-    } 
+        this.end = true;
+        $('#TR').addClass('win');
+        $('#MM').addClass('win');
+        $('#BL').addClass('win');
+        $('.instructions > p').html(`${checkTR['character']} wins!`);
+    } else if (checkTL['occupy'] && checkTM['occupy'] && checkTR['occupy'] && checkML['occupy'] && checkMM['occupy'] && checkMR['occupy'] && checkBL['occupy'] && checkBM['occupy'] && checkBR['occupy'] === true) {
+        this.end = true;
+        $('#TL').addClass('win');
+        $('#TM').addClass('win');
+        $('#TR').addClass('win');
+        $('#ML').addClass('win');
+        $('#MM').addClass('win');
+        $('#MR').addClass('win');
+        $('#BL').addClass('win');
+        $('#BM').addClass('win');
+        $('#BR').addClass('win');
+        $('.instructions > p').html(`Tie Game!`)
+    }
 }
 
 $(function(){
+    $('.item').on('click', function () {
+
+        //keep running the game as long as a win or tie hasn't happened
+        if (ttt.end === false) {
+        //'this' is 'clickedBox'
+        ttt.addingCharacter(this);
+        }
+    })
 })
