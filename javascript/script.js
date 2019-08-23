@@ -58,6 +58,11 @@ ttt.addingCharacter = function (clickedBox) {
             .removeClass('active')
             .addClass('inactive');
 
+        //update the instruction area to indicate whose turn it is
+        const nextTurn = $('.turn.inactive > p').text();
+        const addNextTurnToInstruction = `It's ${nextTurn}'s turn`;
+        $('.instructions > p').html(addNextTurnToInstruction);
+
         //x: remove active class, add inactive class
         //O: remove inactive class, add active class
         $('.turnX').toggleClass('active inactive');

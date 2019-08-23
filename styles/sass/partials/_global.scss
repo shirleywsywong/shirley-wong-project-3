@@ -5,6 +5,12 @@ $lightGrey: #888;
 $darkGrey: #444;
 $lightBlue: #b0e0e6;
 $limeGreen: #bada55;
+$lightGreen: #bada99;
 $pine: #467763;
 $darkPine: #385f4f;
-$teal: #468499
+$teal: #468499;
+
+
+@mixin for-desktop {
+  @media (min-width: 940px) { @content; }
+}

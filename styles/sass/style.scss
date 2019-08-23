@@ -4,15 +4,14 @@
 //layout styles
 body {
     background: $limeGreen;
-    // padding-top: 50px;
-    display: grid;
     justify-content: center;
     font-family: 'Righteous', cursive;
 }
 h1 {
     text-align: center;
     font-size: 4rem;
-    @media (min-width: 768px){
+    line-height: 0;
+    @include for-desktop {
         font-size: 5rem;
     }
 }
@@ -20,32 +19,33 @@ p {
     place-self: center;
     text-align: center;
     margin: 0;
-    font-size: 2.5rem;
-    @media (min-width: 768px){
-        font-size: 3rem;
-    }
 }
 .instructions {
+    margin: 0 auto;
     max-width: 900px;
     font-size: 2rem;
 }
+
+//gameboard styles
 .grid {
     width: 80vw;
     height: 80vw;
-    place-self: center;
+    margin: 0 auto;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
     grid-gap: 1.5rem;
-    padding: 2rem;
+    padding: 1.5rem;
     border: 8px solid $black;
     border-radius: 15px;
     /* Landscape phone to portrait tablet */
-    @media (min-width: 768px){
-        width: 70vh;
-        height: 70vh;
+    @include for-desktop {
+        width: 55vh;
+        height: 55vh;
     }
 }
+
+//game board element styles
 .item {
     place-self: center;
     background: $darkGrey;
@@ -59,7 +59,13 @@ p {
         place-self: center;
         animation: rotation 5s infinite linear;
     }
+    p {font-size: 2rem;
+        @include for-desktop {
+            font-size: 3rem;
+        }
+    }
 }
+//spinning circle animation
 @keyframes rotation {
   from {
     transform: rotate(0deg);
@@ -68,29 +74,40 @@ p {
     transform: rotate(90deg);
   }
 }
+
+//hud styles
 .hud {
     width: 80vw;
-    place-self: center;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: 1fr;
     align-items: stretch;
     grid-gap: 1.5rem;
     padding: 1rem;
-    margin: 2rem 0;
+    margin: 1.5rem auto 2rem auto;
     border: 8px solid $black;
     border-radius: 15px;
     /* Landscape phone to portrait tablet */
-    @media (min-width: 768px){
-        width: 70vh;
+    @include for-desktop {
+        width: 55vh;
     }
 }
+
+//turn indicator styles
 .turn {
     background: $darkGrey;
     color: $lightBlue;
     border-radius: 15px;
     display: grid;
+    p{
+        font-size: 2rem;
+        @include for-desktop {
+            font-size: 3rem;
+        }
+    }
 }
+
+//animation when a character is added to element
 .turnAnimate {
     text-align: center;
     animation: turn-style 0.4s cubic-bezier(.65,.05,.36,1) both;
@@ -103,6 +120,8 @@ p {
     transform: scale(1);   
   }
 }
+
+// box shadow for unclicked elements
 .active {
     box-shadow: 9px 9px $pine;
     transition: all linear 0.1s;
@@ -111,11 +130,15 @@ p {
         transform: translate(4px, 4px);
     }
 }
+
+// box shadow for clicked elements
 .inactive {
     background: $lightGrey;
     cursor: not-allowed;
     box-shadow: 5px 5px $darkPine;
 }
+
+// winning sequence animation
 .win {
     animation: rotate-center 0.6s ease-in-out both; 
     background: $pine;
