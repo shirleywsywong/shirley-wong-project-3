@@ -28,17 +28,9 @@ p {
 
 //gameboard styles
 .grid {
-    width: 80vw;
+    @include parent(80vw, 0 auto, 1.5rem);
     height: 80vw;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(3, 1fr);
-    grid-gap: 1.5rem;
-    padding: 1.5rem;
-    border: 8px solid $black;
-    border-radius: 15px;
-    /* Landscape phone to portrait tablet */
+    @include grid(repeat(3, 1fr), repeat(3, 1fr));
     @include for-desktop {
         width: 55vh;
         height: 55vh;
@@ -47,13 +39,10 @@ p {
 
 //game board element styles
 .item {
+    @include children;
     place-self: center;
-    background: $darkGrey;
-    color: $lightBlue;
     width: 100%;
     height: 100%;
-    border-radius: 15px;
-    display: grid;
     svg {
         width: 50%;
         place-self: center;
@@ -77,17 +66,9 @@ p {
 
 //hud styles
 .hud {
-    width: 80vw;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: 1fr;
+    @include parent(80vw, 1.5rem auto 2rem auto, 1rem);
+    @include grid(repeat(2, 1fr), 1fr);
     align-items: stretch;
-    grid-gap: 1.5rem;
-    padding: 1rem;
-    margin: 1.5rem auto 2rem auto;
-    border: 8px solid $black;
-    border-radius: 15px;
-    /* Landscape phone to portrait tablet */
     @include for-desktop {
         width: 55vh;
     }
@@ -95,10 +76,7 @@ p {
 
 //turn indicator styles
 .turn {
-    background: $darkGrey;
-    color: $lightBlue;
-    border-radius: 15px;
-    display: grid;
+    @include children;
     p{
         font-size: 2rem;
         @include for-desktop {
@@ -123,6 +101,7 @@ p {
 
 // box shadow for unclicked elements
 .active {
+    background: $darkGrey;
     box-shadow: 9px 9px $pine;
     transition: all linear 0.1s;
     &:active {

@@ -10,7 +10,30 @@ $pine: #467763;
 $darkPine: #385f4f;
 $teal: #468499;
 
+//global styles for parents (grid and hud)
+@mixin parent($width, $margin, $padding) {
+    width: $width;
+    margin: $margin;
+    padding: $padding;
+    border: 8px solid $black;
+    border-radius: 15px;
+}
+@mixin grid($columns, $row) {
+    display: grid;
+    grid-template-columns: $columns;
+    grid-template-rows: $row;
+    grid-gap: 1.5rem;
+}
 
+//global styles for children (elements in grid and turn indicator)
+@mixin children {
+    color: $lightBlue;
+    border-radius: 15px;
+    display: grid;
+}
+
+//mobile mixin
 @mixin for-desktop {
   @media (min-width: 940px) { @content; }
 }
+
