@@ -255,11 +255,23 @@ p {
   background: #ffb9b9;
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: (1fr)[2];
-      grid-template-columns: repeat(2, 1fr);
-  -ms-grid-rows: 1fr;
-      grid-template-rows: 1fr;
+  -ms-grid-columns: 1fr;
+      grid-template-columns: 1fr;
+  -ms-grid-rows: (1fr)[2];
+      grid-template-rows: repeat(2, 1fr);
   grid-gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .gridOverlay {
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: (1fr)[2];
+        grid-template-columns: repeat(2, 1fr);
+    -ms-grid-rows: 1fr;
+        grid-template-rows: 1fr;
+    grid-gap: 1.5rem;
+  }
 }
 
 @media (min-width: 940px) {
@@ -269,8 +281,25 @@ p {
   }
 }
 
-.gridOverlay .item {
-  height: 30%;
+.gridOverlay .playerMode {
+  color: #b0e0e6;
+  border-radius: 15px;
+  display: -ms-grid;
+  display: grid;
+  place-self: center;
+  width: 100%;
+  height: 85%;
+  font-size: 2rem;
+}
+
+@media (min-width: 768px) {
+  .gridOverlay .playerMode {
+    height: 30%;
+  }
+}
+
+.gridOverlay .playerMode p {
+  text-align: center;
 }
 
 .playerMode, .item {
@@ -294,8 +323,8 @@ p {
   font-size: 2rem;
 }
 
-@media (min-width: 940px) {
-  .playerMode p, .item p {
+@media (min-width: 768px) {
+  .item p {
     font-size: 3rem;
   }
 }
@@ -421,15 +450,6 @@ p {
 
 .win p {
   color: #444;
-  -webkit-animation: anim-moema-1 0.5s forwards infinite;
-          animation: anim-moema-1 0.5s forwards infinite;
-}
-
-.win p::before {
-  content: '';
-  position: absolute;
-  -webkit-transform: scale3d(0.5, 0.5, 0.5);
-          transform: scale3d(0.5, 0.5, 0.5);
 }
 
 @-webkit-keyframes rotate-center {
@@ -459,10 +479,6 @@ p {
     -webkit-transform: scale3d(0.8, 0.8, 1);
     transform: scale3d(0.8, 0.8, 1);
   }
-  85% {
-    -webkit-transform: scale3d(1.1, 1.1, 1);
-    transform: scale3d(2, 2, 1);
-  }
   100% {
     -webkit-transform: scale3d(1, 1, 1);
     transform: scale3d(1, 1, 1);
@@ -473,10 +489,6 @@ p {
   60% {
     -webkit-transform: scale3d(0.8, 0.8, 1);
     transform: scale3d(0.8, 0.8, 1);
-  }
-  85% {
-    -webkit-transform: scale3d(1.1, 1.1, 1);
-    transform: scale3d(2, 2, 1);
   }
   100% {
     -webkit-transform: scale3d(1, 1, 1);
@@ -492,4 +504,16 @@ p {
   -ms-grid-rows: 1fr;
       grid-template-rows: 1fr;
   grid-gap: 1.5rem;
+}
+
+.reset p {
+  -webkit-animation: anim-moema-1 0.5s forwards infinite;
+          animation: anim-moema-1 0.5s forwards infinite;
+}
+
+.reset p::before {
+  content: '';
+  position: absolute;
+  -webkit-transform: scale3d(0.5, 0.5, 0.5);
+          transform: scale3d(0.5, 0.5, 0.5);
 }

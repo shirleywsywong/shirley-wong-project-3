@@ -6,12 +6,28 @@ wireframe.jpg
 
 https://www.color-hex.com/color-palette/73504
 
-if user clicks on an occupied piece, the computer becomes X
-computer makes 1 more move after game ended
-
-
 win:
+- it's finished
 - use vh units so everyting will fit in 1 vertical screen
 
 challenge:
-- math..how do you
+- math..how do you (wikipedia: when "X" makes the first move every time, the game is won as follows:
+91 distinct positions are won by (X)
+44 distinct positions are won by (O)
+3 distinct positions are drawn)
+
+back pocket
+@keyframes anim-moema-1 {
+	60% {
+		-webkit-transform: scale3d(0.8, 0.8, 1);
+		transform: scale3d(0.8, 0.8, 1);
+	}
+	85% {
+		-webkit-transform: scale3d(1.1, 1.1, 1);
+		transform: scale3d(2, 2, 1);
+	}
+	100% {
+		-webkit-transform: scale3d(1, 1, 1);
+		transform: scale3d(1, 1, 1);
+	}
+}
