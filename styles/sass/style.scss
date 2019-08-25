@@ -51,7 +51,7 @@ p {
 }
 
 //game board element styles
-.item {
+.playerMode, .item {
     @include children;
     place-self: center;
     width: 100%;
