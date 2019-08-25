@@ -42,9 +42,9 @@ ttt.grid = {
 //hide the game board on page load
 ttt.hideGrid = function() {
     $('.grid').hide();
-    console.log('hide grid function');
 }
 
+//array for index lookup
 ttt.positionLookUp = [
     'TL',
     'TM',
@@ -59,7 +59,7 @@ ttt.positionLookUp = [
 
 //run this if user seletcs 1 player mode
 ttt.singlePlayer = function() {
-    console.log('single player function');
+
     //generate a random number between 0-8
     const generateRandom = function() {
         return Math.floor((Math.random() * 9));
@@ -69,9 +69,8 @@ ttt.singlePlayer = function() {
     let randomPosition = generateRandom();
     let computerPositionIndex = ttt.positionLookUp[randomPosition];
 
-    //keep generating this
+    //keep generating a random number for as long as the indexed position is occupied
     while (ttt.grid[computerPositionIndex]['occupy']) {
-
         randomPosition = generateRandom();
         computerPositionIndex = ttt.positionLookUp[randomPosition];
     };
@@ -87,44 +86,39 @@ ttt.singlePlayer = function() {
 
 //adding character to game board when element is clicked
 ttt.addingCharacter = function (clickedBox) {
-    console.log('adding character function');
-    console.log(clickedBox);
-    //if an element is clicked, can't click it again
-    if (this.grid[clickedBox.id]["occupy"] === false) {
-        console.log(`if an element is clicked, can't click it again`);
-        //grab the text from the hud that has a class of active
-        const turn = $('.turn.active > p').text();
-        // console.log(ttt.addingCharacter.turn);
-        //set the element as occupied, and add the text to the element
-        this.grid[clickedBox.id]["occupy"] = true;
-        this.grid[clickedBox.id]["character"] = turn;
 
-        //DOM rendering
-        const addCharaterToElement = `<p class="turnAnimate">${turn}</p>`
-        $(clickedBox)
-            .html(addCharaterToElement)
-            .removeClass('active')
-            .addClass('inactive');
+    //grab the text from the hud that has a class of active
+    const turn = $('.turn.active > p').text();
 
-        //update the instruction area to indicate whose turn it is
-        const nextTurn = $('.turn.inactive > p').text();
-        const addNextTurnToInstruction = `It's ${nextTurn}'s turn`;
-        $('.instructions > p').html(addNextTurnToInstruction);
+    //set the element as occupied, and add the text to the element
+    this.grid[clickedBox.id]["occupy"] = true;
+    this.grid[clickedBox.id]["character"] = turn;
 
-        //x: remove active class, add inactive class
-        //O: remove inactive class, add active class
-        $('.turnX').toggleClass('active inactive');
-        $('.turnO').toggleClass('inactive active');
+    //DOM rendering
+    const addCharaterToElement = `<p class="turnAnimate">${turn}</p>`
+    $(clickedBox)
+        .html(addCharaterToElement)
+        .removeClass('active')
+        .addClass('inactive');
 
-        //check for endgame once something is clicked
-        this.check();
-    }
+    //update the instruction area to indicate whose turn it is
+    const nextTurn = $('.turn.inactive > p').text();
+    const addNextTurnToInstruction = `It's ${nextTurn}'s turn`;
+    $('.instructions > p').html(addNextTurnToInstruction);
+
+    //x: remove active class, add inactive class
+    //O: remove inactive class, add active class
+    $('.turnX').toggleClass('active inactive');
+    $('.turnO').toggleClass('inactive active');
+
+    //check for endgame once something is clicked
+    this.check();
 }
 
 //check for endgame
 ttt.end = false;
 ttt.check = function() {
-    console.log('checking end game function');
+
     //shorten some typing
     const checkTL = this.grid['TL'];
     const checkTM = this.grid['TM'];
@@ -220,7 +214,7 @@ ttt.check = function() {
 
 //rendering the reset button
 ttt.resetButtonRendering = function () {
-    console.log('reset button rendering');
+
     $('.hud')
     .addClass('reset')
     .html(`
@@ -244,7 +238,7 @@ ttt.svg = `<svg aria-hidden="true" focusable="false" data-prefix="fab" data-icon
 
 //let user play the game again
 ttt.reset = function () {
-    console.log('reset function');
+
     //when reset is clicked, reset all values in ttt.grid
     $.each(ttt.grid, function(index, value){
         value['occupy'] = false;
@@ -279,17 +273,17 @@ ttt.reset = function () {
     //let the game begin again
     ttt.end = false;
 }
-ttt.singleP = false;
+
 //listen for 1-player mode or 2-player mode 
+ttt.singleP = false;
 ttt.init = function() {
-    console.log('game init function');
-    //if 1-player mode is selected, run singlePlayer function
+
+    //if 1-player mode is selected, reveal the game board
     $('#singleP').on('click', function() {
-        //reveal the gameboard
         ttt.singleP = true;
+        //reveal the gameboard
         $('.gridOverlay').hide();
         $('.grid').show();
-        console.log('single player is clicked');
     });
 
     //if 2-player mode is selected, just reveal the game board
@@ -297,32 +291,33 @@ ttt.init = function() {
         //reveal the gameboard
         $('.gridOverlay').hide();
         $('.grid').show();
-        console.log('2 player is clicked');
     })
 
     //game starts
     $('.item').on('click', function() {
 
-        // ttt.curentId = ($(this).attr('id'));
-        console.log('game element is clicked');
         //keep running the game as long as a win or tie hasn't happened
         if (ttt.end === false) {
-        
-            //'this' is 'clickedBox'
-            ttt.addingCharacter(this); //player makes a move
-            
-            if (ttt.singleP) {
-                ttt.singlePlayer();
+
+            //if an element is clicked, can't click it again
+            if (ttt.grid[this.id]["occupy"]) {
+                $('.instructions > p').html('Pick an empty spot');
+            } else {
+                
+                //'this' is 'clickedBox'
+                ttt.addingCharacter(this);
+
+                //if single player mode, and if player's last move didn't end the game, run singleplayer function
+                if (ttt.singleP === true && ttt.end === false) { 
+                    ttt.singlePlayer();
+                }
             }
-            // if player's last move didn't end the game AND we're 1Player
-            // then do computer move
         }
     })
 }
 
 $(function(){
     //hide gameboard and let user choose single or two players
-    console.log('page loads');
     ttt.hideGrid();
     ttt.init();
 })
