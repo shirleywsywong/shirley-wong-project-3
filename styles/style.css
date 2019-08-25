@@ -273,7 +273,7 @@ p {
   height: 30%;
 }
 
-.item {
+.playerMode, .item {
   color: #b0e0e6;
   border-radius: 15px;
   display: -ms-grid;
@@ -283,19 +283,19 @@ p {
   height: 100%;
 }
 
-.item svg {
+.playerMode svg, .item svg {
   width: 50%;
   place-self: center;
   -webkit-animation: rotation 5s infinite linear;
           animation: rotation 5s infinite linear;
 }
 
-.item p {
+.playerMode p, .item p {
   font-size: 2rem;
 }
 
 @media (min-width: 940px) {
-  .item p {
+  .playerMode p, .item p {
     font-size: 3rem;
   }
 }

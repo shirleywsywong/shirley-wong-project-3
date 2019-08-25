@@ -6,11 +6,8 @@ wireframe.jpg
 
 https://www.color-hex.com/color-palette/73504
 
-todo:
-- add reset button to hud
-
-ask:
-- color on winning sequence?
+if user clicks on an occupied piece, the computer becomes X
+computer makes 1 more move after game ended
 
 
 win:
