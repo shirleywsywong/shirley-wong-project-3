@@ -95,7 +95,9 @@ ttt.addingCharacter = function (clickedBox) {
     this.grid[clickedBox.id]["character"] = turn;
 
     //DOM rendering
-    const addCharaterToElement = `<p class="turnAnimate">${turn}</p>`
+    const addCharaterToElement = 
+    `<p class="turnAnimate">${turn}</p>
+    <span class="sr-only">${turn} is added to ${clickedBox.id}</span>`
     $(clickedBox)
         .html(addCharaterToElement)
         .removeClass('active')

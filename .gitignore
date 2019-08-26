@@ -9,6 +9,7 @@ https://www.color-hex.com/color-palette/73504
 win:
 - it's finished
 - use vh units so everyting will fit in 1 vertical screen
+- included sr only text to facilitate game play
 
 challenge:
 - math..how do you (wikipedia: when "X" makes the first move every time, the game is won as follows:
